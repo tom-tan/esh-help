@@ -44,7 +44,7 @@
 (require 'dash)
 
 ;;;###autoload
-(defun esh-help-eldoc-setup ()
+(defun setup-esh-help-eldoc ()
   "Setup eldoc function for Eshell."
   (interactive)
   (add-hook 'eshell-mode-hook
