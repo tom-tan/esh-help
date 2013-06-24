@@ -63,7 +63,7 @@ It comes from Zsh."
   (cond
     ((eshell-find-alias-function cmd)
      (describe-function (eshell-find-alias-function cmd)))
-    ((string-match-p "^\\*" cmd)
+    ((string-match-p "^\\*." cmd)
      (man (substring cmd 1)))
     ((eshell-search-path cmd) (man cmd))
     ((functionp (intern cmd)) (describe-function (intern cmd)))))
@@ -76,20 +76,21 @@ It comes from Zsh."
         (eol (save-excursion
                (move-end-of-line nil)
                (point))))
-    (save-excursion
-      (--if-let (re-search-backward "|" bol t)
-        (forward-char)
-        (eshell-bol))
-      (--when-let (re-search-forward "[^\s]+" eol t)
-        (goto-char it)
-        (current-word)))))
+    (when (<= bol (point))
+      (save-excursion
+        (--if-let (re-search-backward "|" bol t)
+          (forward-char)
+          (eshell-bol))
+        (--when-let (re-search-forward "[^\s]+" eol t)
+          (goto-char it)
+          (current-word))))))
 
 (defun esh-help-eldoc-help-string (cmd)
   "Return minibuffer help string for CMD."
   (cond
     ((eshell-find-alias-function cmd)
      (eldoc-get-fnsym-args-string (eshell-find-alias-function cmd)))
-    ((string-match-p "^\\*" cmd)
+    ((string-match-p "^\\*." cmd)
      (esh-help-eldoc-man-minibuffer-string (substring cmd 1)))
     ((eshell-search-path cmd) (esh-help-eldoc-man-minibuffer-string cmd))
     ((functionp (intern cmd)) (eldoc-get-fnsym-args-string (intern cmd)))))
