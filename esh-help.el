@@ -1,4 +1,4 @@
-;;; esh-help.el --- Add some help features for Eshell
+;;; esh-help.el --- Add some help functions and support for Eshell
 
 ;; Copyright (C) 2013  by Tomoya Tanjo
 
@@ -22,9 +22,9 @@
 
 ;;; Commentary:
 
-;; This library adds the following help features for Eshell:
-;; - run-help functionality inspired by Zsh
-;; - eldoc functionality
+;; This library adds the following help functions and support for Eshell:
+;; - run-help function inspired by Zsh
+;; - eldoc support
 ;;
 ;; To use this package, add these lines to your .emacs file:
 ;;     (require 'esh-help)

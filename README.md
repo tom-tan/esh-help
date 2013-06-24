@@ -1,8 +1,8 @@
 # esh-help.el
 
-This library adds the following help features for Eshell:
-* run-help functionality inspired by Zsh
-* eldoc functionality
+This library adds the following help functions and support for Eshell:
+* run-help function inspired by Zsh
+* eldoc support
 
 To use this package, add these lines to your `.emacs` file:
 ```elisp
