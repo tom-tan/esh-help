@@ -99,7 +99,7 @@ It comes from Zsh."
   "Return help string for the shell command CMD."
   (let ((lang (getenv "LANG")))
     (setenv "LANG" "C")
-    (let ((str (shell-command-to-string (concat "man " cmd))))
+    (let ((str (shell-command-to-string (format "man %s | col -b" cmd))))
       (setenv "LANG" lang)
       str)))
 
