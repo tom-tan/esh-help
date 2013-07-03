@@ -112,7 +112,7 @@ It comes from Zsh."
         (--drop-while (not (string-match-p "^SYNOPSIS$" it)))
         (nth 1)
         (funcall (lambda (s)
-                   (let ((idx (string-match "[^\s]" s)))
+                   (let ((idx (string-match "[^\s\t]" s)))
                      (substring s idx))))))))
 
 (defun esh-help-eldoc-command ()
