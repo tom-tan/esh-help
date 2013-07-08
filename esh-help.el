@@ -4,7 +4,7 @@
 
 ;; Author: Tomoya Tanjo <ttanjo@gmail.com>
 ;; URL: https://github.com/tom-tan/esh-help/
-;; Package-Requires: ((dash "20130617.739"))
+;; Package-Requires: ((dash "1.4.0"))
 ;; Keywords: eshell, extensions
 
 ;; This program is free software; you can redistribute it and/or modify
