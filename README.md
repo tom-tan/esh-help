@@ -7,7 +7,7 @@ This library adds the following help functions and support for Eshell:
 To use this package, add these lines to your `.emacs` file:
 ```elisp
     (require 'esh-help)
-    (esh-help-eldoc-setup)  ;; To use eldoc in Eshell
+    (setup-esh-help-eldoc)  ;; To use eldoc in Eshell
 ```
 And by using `M-x eldoc-mode` in Eshell, you can see help strings
 for the pointed command in minibuffer.
