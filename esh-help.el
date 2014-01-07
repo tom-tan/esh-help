@@ -1,6 +1,6 @@
 ;;; esh-help.el --- Add some help functions and support for Eshell
 
-;; Copyright (C) 2013  by Tomoya Tanjo
+;; Copyright (C) 2013, 2014 by Tomoya Tanjo
 
 ;; Author: Tomoya Tanjo <ttanjo@gmail.com>
 ;; URL: https://github.com/tom-tan/esh-help/
