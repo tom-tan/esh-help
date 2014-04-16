@@ -4,6 +4,8 @@ This library adds the following help functions and support for Eshell:
 * run-help function inspired by Zsh
 * eldoc support
 
+You can install it by using `package-install` via [MELPA](http://melpa.milkbox.net/).
+
 To use this package, add these lines to your `.emacs` file:
 ```elisp
     (require 'esh-help)
