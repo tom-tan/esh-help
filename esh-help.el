@@ -85,15 +85,21 @@ It comes from Zsh."
           (goto-char it)
           (current-word))))))
 
+(defalias 'esh-help--get-fnsym-args-string
+    (if (fboundp 'eldoc-get-fnsym-args-string)
+        #'eldoc-get-fnsym-args-string
+      #'elisp-get-fnsym-args-string)
+  "eldoc-get-fnsym-args-string is no longer defined in Emacs 25")
+
 (defun esh-help-eldoc-help-string (cmd)
   "Return minibuffer help string for CMD."
   (cond
     ((eshell-find-alias-function cmd)
-     (eldoc-get-fnsym-args-string (eshell-find-alias-function cmd)))
+     (esh-help--get-fnsym-args-string (eshell-find-alias-function cmd)))
     ((string-match-p "^\\*." cmd)
      (esh-help-eldoc-man-minibuffer-string (substring cmd 1)))
     ((eshell-search-path cmd) (esh-help-eldoc-man-minibuffer-string cmd))
-    ((functionp (intern cmd)) (eldoc-get-fnsym-args-string (intern cmd)))))
+    ((functionp (intern cmd)) (esh-help--get-fnsym-args-string (intern cmd)))))
 
 (defun esh-help-man-string (cmd)
   "Return help string for the shell command CMD."
