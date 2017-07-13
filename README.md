@@ -1,5 +1,8 @@
 # esh-help.el
 
+[![MELPA](http://melpa-stable.milkbox.net/packages/esh-help-badge.svg)](http://melpa-stable.milkbox.net/#/esh-help)
+[![MELPA](http://melpa.milkbox.net/packages/esh-help-badge.svg)](http://melpa.milkbox.net/#/esh-help)
+
 This library adds the following help functions and support for Eshell:
 * run-help function inspired by Zsh
 * eldoc support
