@@ -43,6 +43,7 @@
 (require 'eldoc)
 (require 'env)
 (require 'dash)
+(require 'man)
 
 ;;;###autoload
 (defun setup-esh-help-eldoc ()
@@ -105,7 +106,8 @@ It comes from Zsh."
   "Return help string for the shell command CMD."
   (let ((lang (getenv "LANG")))
     (setenv "LANG" "C")
-    (let ((str (shell-command-to-string (format "man %s | col -b" cmd))))
+    (let ((str (shell-command-to-string (format "%s %s | col -b"
+                                                manual-program cmd))))
       (setenv "LANG" lang)
       str)))
 
