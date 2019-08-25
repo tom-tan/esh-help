@@ -103,6 +103,14 @@ It comes from Zsh."
     ((eshell-search-path cmd) (esh-help-eldoc-man-minibuffer-string cmd))
     ((functionp (intern cmd)) (esh-help--get-fnsym-args-string (intern cmd)))))
 
+(defvar esh-help-man-cache (make-hash-table :test #'equal)
+  "Cache of synopses scraped from system man pages.")
+
+(defun esh-help-clear-man-cache ()
+  "Clear the `esh-help-man-cache'."
+  (interactive)
+  (setq esh-help-man-cache (make-hash-table :test #'equal)))
+
 (defun esh-help-man-string (cmd)
   "Return help string for the shell command CMD."
   (let ((lang (getenv "LANG")))
@@ -114,15 +122,24 @@ It comes from Zsh."
 
 (defun esh-help-eldoc-man-minibuffer-string (cmd)
   "Return minibuffer help string for the shell command CMD."
-  (let ((str (split-string (esh-help-man-string cmd) "\n")))
-    (unless (equal (concat "No manual entry for " cmd)
+  (let ((cache-result (gethash cmd esh-help-man-cache)))
+    (if cache-result
+        (unless (eql 'none cache-result)
+          cache-result)
+      (let ((str (split-string (esh-help-man-string cmd) "\n")))
+        (if (equal (concat "No manual entry for " cmd)
                    (car str))
-      (->> str
-        (--drop-while (not (string-match-p "^SYNOPSIS$" it)))
-        (nth 1)
-        (funcall (lambda (s)
-                   (let ((idx (string-match "[^\s\t]" s)))
-                     (substring s idx))))))))
+            (progn
+              (puthash cmd 'none esh-help-man-cache)
+              nil)
+          (puthash cmd
+                   (->> str
+                        (--drop-while (not (string-match-p "^SYNOPSIS$" it)))
+                        (nth 1)
+                        (funcall (lambda (s)
+                                   (let ((idx (string-match "[^\s\t]" s)))
+                                     (substring s idx)))))
+                   esh-help-man-cache))))))
 
 (defun esh-help-eldoc-command ()
   "Return eldoc string for the pointed symbol."
